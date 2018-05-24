@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1"
-      fx:controller="main.java.drawie.RoomController">
+      fx:controller="drawie.RoomController">
     <children>
         <Button layoutX="375.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" text="Menu"
                 textAlignment="CENTER"/>

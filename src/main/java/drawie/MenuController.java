@@ -1,4 +1,4 @@
-package main.java.drawie;
+package drawie;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

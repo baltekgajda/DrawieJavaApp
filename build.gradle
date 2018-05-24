@@ -1,0 +1,13 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile("io.socket:socket.io-client:1.0.0")
+}

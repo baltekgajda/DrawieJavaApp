@@ -1,4 +1,4 @@
-package main.java.drawie;
+package drawie;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

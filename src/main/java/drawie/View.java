@@ -1,4 +1,4 @@
-package main.java.drawie;
+package drawie;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ public class View {
 
     public View(Stage primaryStage) {
         setDefaultStageSettings(primaryStage);
-        this.loader = new FXMLLoader(this.getClass().getResource("/main/resources/fxml/MainMenu.fxml"));
+        this.loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
         Pane pane = null;
         try {
             pane = loader.load();
@@ -34,7 +34,7 @@ public class View {
         //TODO sprawdzic czy cos usunac
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
-        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/main/resources/images/DrawieIcon.bmp")));
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DrawieIcon.bmp")));
         primaryStage.setTitle("Drawie");
         primaryStage.centerOnScreen();
     }
@@ -57,7 +57,7 @@ public class View {
     }
 
     public void loadMainMenu(Model model) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/main/resources/fxml/MainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
         setLoader(loader);
         MenuController menuController = loader.getController();
         menuController.setModel(model);
@@ -65,7 +65,7 @@ public class View {
     }
 
     public void loadRoom(Model model) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/main/resources/fxml/Room.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/Room.fxml"));
         setLoader(loader);
         RoomController roomController = loader.getController();
         roomController.setModel(model);
