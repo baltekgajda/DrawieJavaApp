@@ -21,6 +21,7 @@ public class MenuController {
 
     @FXML
     private void createNewRoom() {
+        model.newRoom();
         System.out.println("createNewRoom");
         view.loadRoom(model);
     }

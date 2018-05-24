@@ -13,7 +13,7 @@ public class Start extends Application {
     public void start(Stage primaryStage) {
         View view = new View(primaryStage);
         Model model = new Model();
-        MenuController menuController = view.getMenuController();
+        MenuController menuController = view.getLoader().getController();
         menuController.setView(view);
         menuController.setModel(model);
     }

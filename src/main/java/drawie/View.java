@@ -72,8 +72,8 @@ public class View {
         roomController.setView(this);
     }
 
-    public MenuController getMenuController() {
-        return this.loader.getController();
+    public FXMLLoader getLoader() {
+        return this.loader;
     }
 
 }
