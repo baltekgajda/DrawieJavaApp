@@ -3,7 +3,12 @@ package drawie;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import sun.misc.BASE64Decoder;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class RoomController {
 
@@ -51,5 +56,21 @@ public class RoomController {
 
     public void setView(View view) {
         this.view = view;
+    }
+
+    public void drawDumpBCOnCanvas(String dumpInBase64){
+        BASE64Decoder base64Decoder = new BASE64Decoder();
+        ByteArrayInputStream inputStream = null;
+        try {
+            inputStream = new ByteArrayInputStream(base64Decoder.decodeBuffer(dumpInBase64));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Image dumpImg = new Image(inputStream);
+        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        gc.clearRect(0,0,roomCanvas.getWidth(), roomCanvas.getHeight());
+        gc.drawImage(dumpImg, 0,0);
+        System.out.println("Image drawn");
     }
 }

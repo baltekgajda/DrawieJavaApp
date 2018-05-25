@@ -17,6 +17,7 @@ public class MenuController {
         model.joinRoom(roomUrl.getText());
         System.out.println("joinExistingRoom" + roomUrl.getText());
         view.loadRoom(model);
+
     }
 
     @FXML
