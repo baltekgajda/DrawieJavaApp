@@ -14,13 +14,14 @@ import sun.misc.BASE64Decoder;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Vector;
 
 public class RoomController {
 
     private View view;
     private Model model;
 
-    private JSONArray mStroke;
+    private Vector<int[]> mStroke = new Vector<>();
 
     @FXML
     private Canvas roomCanvas;
@@ -39,23 +40,22 @@ public class RoomController {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         try {
             roomCanvas.setOnMousePressed(event -> {
-                mStroke = new JSONArray();
-//                mStroke.put(new JSONArray().put((int) event.getX()).put((int) event.getX())); TODO dodawanie tego JSONA
+                mStroke = new Vector<>();
+                mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
+//                mStroke.put(new JSONArray().put((int) event.getX()).put((int) event.getX()));
                 gc.beginPath();
                 gc.lineTo(event.getX(), event.getY());
                 gc.stroke();
             });
 
             roomCanvas.setOnMouseDragged(event -> {
-                /*JSONArray points = new JSONArray(); //TODO WRZUCANIE DO TABLICY
-                points.put((int) event.getX());
-                points.put((int) event.getX());
-                mStroke.put(points);*/
+                mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
                 gc.lineTo(event.getX(), event.getY());
                 gc.stroke();
             });
 
             roomCanvas.setOnMouseReleased(event ->{
+                //TODO poprawne ustawianie koloru itp.
                 model.sendStroke("#00ff00", "round", "solid", (int) gc.getLineWidth(), mStroke);
             });
         } catch (Exception e) {

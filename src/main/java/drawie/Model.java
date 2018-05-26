@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.Vector;
 
 public class Model {
 
@@ -57,10 +58,15 @@ public class Model {
         socket.emit("undo");
     }
 
-    public void sendStroke(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke) {
+    public void sendStroke(String color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
         JSONObject strokeObj = new JSONObject();
         JSONObject options = new JSONObject();
+        JSONArray stroke = new JSONArray();
         try {
+            for(int[] points : mStroke){
+                stroke.put(points);
+            }
+
             options.put("strokeStyle", color);
             options.put("lineCap", lineCap);
             options.put("fillStyle", fillStyle);
