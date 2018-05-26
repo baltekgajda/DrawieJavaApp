@@ -19,30 +19,36 @@ public class RoomController {
     private Canvas roomCanvas;
 
     @FXML
-    private void drawOnCanvas()
-    {
+    private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         gc.setLineWidth(1);
         gc.setStroke(Color.BLACK);
-        System.out.println("drawCanvas");
 
         try {
             roomCanvas.setOnMousePressed(event -> {
-                System.out.println("Mouse click");
                 gc.beginPath();
-                gc.lineTo(event.getSceneX(), event.getSceneY());
+                gc.lineTo(event.getX(), event.getY());
                 gc.stroke();
             });
 
             roomCanvas.setOnMouseDragged(event -> {
-                System.out.println("Mouse dragged");
-                gc.lineTo(event.getSceneX(), event.getSceneY());
+                gc.lineTo(event.getX(), event.getY());
                 gc.stroke();
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
         }
+    }
+
+    @FXML
+    private void undoButtonClicked() {
+        model.handleUndoClick();
+    }
+
+    @FXML
+    private void redoButtonClicked() {
+        model.handleRedoClick();
     }
 
     @FXML
@@ -58,7 +64,7 @@ public class RoomController {
         this.view = view;
     }
 
-    public void drawDumpBCOnCanvas(String dumpInBase64){
+    public void drawDumpBCOnCanvas(String dumpInBase64) {
         BASE64Decoder base64Decoder = new BASE64Decoder();
         ByteArrayInputStream inputStream = null;
         try {
@@ -69,8 +75,8 @@ public class RoomController {
 
         Image dumpImg = new Image(inputStream);
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.clearRect(0,0,roomCanvas.getWidth(), roomCanvas.getHeight());
-        gc.drawImage(dumpImg, 0,0);
+        gc.clearRect(0, 0, roomCanvas.getWidth(), roomCanvas.getHeight());
+        gc.drawImage(dumpImg, 0, 0);
         System.out.println("Image drawn");
     }
 }

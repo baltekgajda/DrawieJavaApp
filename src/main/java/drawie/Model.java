@@ -8,8 +8,10 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 
 public class Model {
+
     private Socket socket;
     private RoomController roomController;
+
     public void joinRoom(String text) {
         try {
             socket = IO.socket(text);
@@ -35,11 +37,11 @@ public class Model {
         });
     }
 
-    private void handleRedoClick() {
+    public void handleRedoClick() {
         socket.emit("redo");
     }
 
-    private void handleUndoClick() {
+    public void handleUndoClick() {
         socket.emit("undo");
     }
 
