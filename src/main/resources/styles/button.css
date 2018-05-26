@@ -1,0 +1,15 @@
+.button {
+    -fx-min-width: 24px;
+    -fx-min-height: 24px;
+    -fx-background-color: #CCCCCC;
+    -fx-border-radius: 5px;
+    -fx-padding: 0px;
+}
+
+.button:hover {
+    -fx-background-color: #D2D2D7;
+}
+
+.button:pressed {
+    -fx-background-color: #BEBED7;
+}

@@ -1,0 +1,13 @@
+.text-field {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-text-fill: #b5b5b5;
+    -fx-alignment: center;
+}
+
+.text-field:hover {
+    -fx-border-width: 2px;
+}

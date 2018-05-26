@@ -1,11 +1,13 @@
 package drawie;
 
+import com.sun.jndi.toolkit.url.Uri;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Vector;
 
@@ -14,15 +16,19 @@ public class Model {
     private Socket socket;
     private RoomController roomController;
 
-    public void joinRoom(String text) {
+    public boolean joinRoom(String text) {
         try {
             socket = IO.socket(text);
-        } catch (URISyntaxException e) {
+        }
+        catch (URISyntaxException e) {
             e.printStackTrace();
-            return;
+            return false;
+        } catch (RuntimeException e) {
+            return false;
         }
         configureSocket();
         socket.connect();
+        return true;
     }
 
     private void configureSocket(){

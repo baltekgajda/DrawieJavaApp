@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
@@ -13,11 +13,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
+<?import javafx.scene.paint.Color?>
 <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #eeeeef;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawie.RoomController">
     <children>
-        <Button layoutX="739.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" text="Menu" textAlignment="CENTER" />
+        <Button layoutX="723.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" prefWidth="63.0" stylesheets="@../styles/button.css" text="Menu" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
       <VBox layoutX="162.0" layoutY="26.0" prefHeight="548.8" prefWidth="500.0" style="-fx-background-color: white;">
          <cursor>
             <Cursor fx:constant="CROSSHAIR" />
@@ -28,16 +31,16 @@
          <children>
             <HBox prefHeight="44.0" prefWidth="500.0" spacing="15" style="-fx-padding: 10; -fx-background-color: #eeeeef;">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#undoButtonClicked" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: #cccccc; -fx-padding: 0 0 0 0;">
-                      <graphic>
-                         <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
-                             <image>
-                                <Image url="@../images/UndoIcon.png" />
-                            </image>
-                        </ImageView>
-                      </graphic>
-                  </Button>
-                   <Button mnemonicParsing="false" onMouseClicked="#redoButtonClicked" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: #cccccc; -fx-padding: 0 0 0 0;">
+                   <Button mnemonicParsing="false" onMouseClicked="#undoButtonClicked" stylesheets="@../styles/button.css">
+                       <graphic>
+                           <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../images/UndoIcon.png" />
+                               </image>
+                           </ImageView>
+                       </graphic>
+                   </Button>
+                   <Button mnemonicParsing="false" onMouseClicked="#redoButtonClicked" stylesheets="@../styles/button.css">
                        <graphic>
                            <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                                <image>
@@ -46,11 +49,12 @@
                            </ImageView>
                        </graphic>
                    </Button>
-                  <Slider fx:id="paintbrushWidthSlider" max="10.0" onMouseReleased="#changeWidth" prefHeight="24.0" prefWidth="183.0" style="-fx-background-color: #cccccc; -fx-padding: 5;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Slider>
+                  <ColorPicker fx:id="colorPicker" accessibleRole="IMAGE_VIEW" minWidth="20.0" onMouseReleased="#changePaintbrushColor" prefHeight="38.0" prefWidth="20.0" stylesheets="@../styles/color-picker.css">
+                       <value>
+                           <Color />
+                       </value>
+                   </ColorPicker>
+                  <Slider fx:id="paintbrushWidthSlider" max="30.0" onMouseReleased="#changeWidth" stylesheets="@../styles/slider.css" />
                </children>
             </HBox>
             <Canvas fx:id="roomCanvas" height="500.0" onMouseClicked="#drawOnCanvas" onMouseDragged="#drawOnCanvas" width="500.0">
@@ -61,10 +65,6 @@
             <Pane prefHeight="4.8" prefWidth="500.0" style="-fx-background-color: #eeeeef;" />
          </children>
       </VBox>
-        <Text layoutX="25.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM!" wrappingWidth="70.26364135742188">
-            <font>
-                <Font name="Arial Italic" size="65.0" />
-            </font>
-        </Text>
+
     </children>
 </Pane>
