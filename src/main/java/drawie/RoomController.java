@@ -31,9 +31,6 @@ public class RoomController {
     @FXML
     private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.setLineWidth(1);
-        gc.setStroke(Color.BLACK);
-
         try {
             roomCanvas.setOnMousePressed(event -> {
                 gc.beginPath();
