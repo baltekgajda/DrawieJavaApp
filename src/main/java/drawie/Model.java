@@ -45,9 +45,7 @@ public class Model {
         socket.emit("undo");
     }
 
-    public void newRoom() {
-
-    }
+    public void newRoom() { }
 
     public void setRoomController(RoomController rc){
         roomController = rc;

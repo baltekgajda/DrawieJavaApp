@@ -3,6 +3,7 @@ package drawie;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import sun.misc.BASE64Decoder;
@@ -17,6 +18,15 @@ public class RoomController {
 
     @FXML
     private Canvas roomCanvas;
+
+    @FXML
+    private Slider paintbrushWidthSlider;
+
+    @FXML
+    private void changeWidth() {
+        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        gc.setLineWidth(paintbrushWidthSlider.getValue());
+    }
 
     @FXML
     private void drawOnCanvas() {
