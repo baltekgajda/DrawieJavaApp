@@ -3,9 +3,11 @@ package drawie;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +31,14 @@ public class RoomController {
     private Slider paintbrushWidthSlider;
 
     @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
+    private void changePaintbrushColor() {
+        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        gc.setFill(Paint.valueOf(colorPicker.getValue().toString()));
+    }
+    @FXML
     private void changeWidth() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         gc.setLineWidth(paintbrushWidthSlider.getValue());
@@ -43,6 +53,7 @@ public class RoomController {
 //                mStroke.put(new JSONArray().put((int) event.getX()).put((int) event.getX())); TODO dodawanie tego JSONA
                 gc.beginPath();
                 gc.lineTo(event.getX(), event.getY());
+                gc.setLineCap(StrokeLineCap.ROUND);
                 gc.stroke();
             });
 

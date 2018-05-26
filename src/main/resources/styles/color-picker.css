@@ -1,0 +1,16 @@
+.color-picker{
+    -fx-min-width: 30px;
+    -fx-pref-height: 24px;
+    -fx-background-color: #CCCCCC;
+    -fx-background-radius: 5px;
+}
+
+.color-picker:hover {
+    -fx-background-color: #D2D2D7;
+}
+
+.color-picker:pressed {
+    -fx-background-color: #BEBED7;
+}
+
+

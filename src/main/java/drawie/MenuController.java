@@ -14,16 +14,18 @@ public class MenuController {
 
     @FXML
     private void joinExistingRoom() {
-        model.joinRoom(roomUrl.getText());
-        System.out.println("joinExistingRoom" + roomUrl.getText());
-        view.loadRoom(model);
-
+        if(model.joinRoom(roomUrl.getText()))
+            view.loadRoom(model);
+        else
+        {
+            roomUrl.clear();
+            roomUrl.setPromptText("wrong url");
+        }
     }
 
     @FXML
     private void createNewRoom() {
         model.newRoom();
-        System.out.println("createNewRoom");
         view.loadRoom(model);
     }
 
