@@ -45,11 +45,9 @@ public class RoomController {
     private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         try {
-            System.out.println(colorPicker.getValue().toString());
             roomCanvas.setOnMousePressed(event -> {
                 mStroke = new Vector<>();
                 mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
-//                mStroke.put(new JSONArray().put((int) event.getX()).put((int) event.getX()));
                 gc.setStroke(colorPicker.getValue());
                 gc.beginPath();
                 gc.lineTo(event.getX(), event.getY());

@@ -4,6 +4,7 @@ import com.sun.jndi.toolkit.url.Uri;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.client.Url;
+import io.socket.emitter.Emitter;
 import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.UUID;
 import java.util.Vector;
 
 public class Model {
@@ -21,6 +23,8 @@ public class Model {
     private Socket socket;
     private RoomController roomController;
     private String roomURL;
+
+    private String hostURL = "https://drawie.herokuapp.com";
 
     public boolean joinRoom(String text) {
         if(text.length()==0)
@@ -44,7 +48,6 @@ public class Model {
     private void configureSocket(){
         socket.on("dumpBC", args -> {
             JSONObject obj = (JSONObject) args[0];
-            System.out.println(obj.toString());
             String[] imgInB64 =null;
             try {
                  imgInB64 = obj.getString("snapshot").split(",");
@@ -56,7 +59,6 @@ public class Model {
 
         socket.on("strokeBC", args -> {
             JSONObject obj = (JSONObject) args[0];
-            System.out.println(obj.toString());
             try {
                 JSONObject opt = obj.getJSONObject("options");
                 roomController.drawStrokeBCOnCanvas(opt.getString("strokeStyle"), opt.getString("lineCap"), opt.getString("fillStyle"), opt.getInt("lineWidth"), obj.getJSONArray("stroke"));
@@ -96,7 +98,13 @@ public class Model {
         socket.emit("stroke", strokeObj);
     }
 
-    public void newRoom() { }
+    public void newRoom() {
+        joinRoom(hostURL+"?room="+generateRandomUUID());
+    }
+
+    private String generateRandomUUID(){
+        return UUID.randomUUID().toString();
+    }
 
     public void setRoomController(RoomController rc){
         roomController = rc;
