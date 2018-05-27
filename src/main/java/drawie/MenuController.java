@@ -4,6 +4,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 public class MenuController {
 
     private View view;
@@ -19,7 +23,7 @@ public class MenuController {
         else
         {
             roomUrl.clear();
-            roomUrl.setPromptText("wrong url");
+            roomUrl.setPromptText("wrong URL");
         }
     }
 

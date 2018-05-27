@@ -3,10 +3,15 @@ package drawie;
 import com.sun.jndi.toolkit.url.Uri;
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.client.Url;
+import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Vector;
@@ -15,8 +20,12 @@ public class Model {
 
     private Socket socket;
     private RoomController roomController;
+    private String roomURL;
 
     public boolean joinRoom(String text) {
+        if(text.length()==0)
+            return false;
+
         try {
             socket = IO.socket(text);
         }
@@ -28,6 +37,7 @@ public class Model {
         }
         configureSocket();
         socket.connect();
+        setRoomURL(text);
         return true;
     }
 
@@ -90,5 +100,20 @@ public class Model {
 
     public void setRoomController(RoomController rc){
         roomController = rc;
+    }
+
+    public void setRoomURL(String roomURL) {
+        this.roomURL = roomURL;
+    }
+
+    public void copyURLToClipboard() {
+        StringSelection selection = new StringSelection(this.roomURL);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+    }
+
+    public String hexColorToHashFormat(Color color)
+    {
+        return "#"+(color.toString()).substring(2);
     }
 }
