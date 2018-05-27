@@ -17,10 +17,14 @@
 <?import javafx.scene.paint.Color?>
 <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #eeeeef;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawie.RoomController">
     <children>
-        <Button layoutX="723.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" prefWidth="63.0" stylesheets="@../styles/button.css" text="Menu" textAlignment="CENTER">
+        <Button layoutX="715.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" prefWidth="70.0" stylesheets="@../styles/button.css" text="Menu" textAlignment="CENTER">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Button>
+        <Button layoutX="715.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#copyURLToClipboard" prefWidth="70.0" stylesheets="@../styles/button.css" text="Copy URL" textAlignment="CENTER">
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font></Button>
       <VBox layoutX="162.0" layoutY="26.0" prefHeight="548.8" prefWidth="500.0" style="-fx-background-color: white;">
          <cursor>
             <Cursor fx:constant="CROSSHAIR" />
@@ -49,7 +53,7 @@
                            </ImageView>
                        </graphic>
                    </Button>
-                  <ColorPicker fx:id="colorPicker" accessibleRole="IMAGE_VIEW" minWidth="20.0" onMouseReleased="#changePaintbrushColor" prefHeight="38.0" prefWidth="20.0" stylesheets="@../styles/color-picker.css">
+                  <ColorPicker fx:id="colorPicker" accessibleRole="IMAGE_VIEW" minWidth="20.0" prefHeight="38.0" prefWidth="20.0" stylesheets="@../styles/color-picker.css">
                        <value>
                            <Color />
                        </value>

@@ -1,5 +1,6 @@
 package drawie;
 
+import io.socket.client.Url;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -35,11 +36,6 @@ public class RoomController {
     private ColorPicker colorPicker;
 
     @FXML
-    private void changePaintbrushColor() {
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.setFill(Paint.valueOf(colorPicker.getValue().toString()));
-    }
-    @FXML
     private void changeWidth() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         gc.setLineWidth(paintbrushWidthSlider.getValue());
@@ -49,10 +45,12 @@ public class RoomController {
     private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         try {
+            System.out.println(colorPicker.getValue().toString());
             roomCanvas.setOnMousePressed(event -> {
                 mStroke = new Vector<>();
                 mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
 //                mStroke.put(new JSONArray().put((int) event.getX()).put((int) event.getX()));
+                gc.setStroke(colorPicker.getValue());
                 gc.beginPath();
                 gc.lineTo(event.getX(), event.getY());
                 gc.setLineCap(StrokeLineCap.ROUND);
@@ -67,7 +65,7 @@ public class RoomController {
 
             roomCanvas.setOnMouseReleased(event ->{
                 //TODO poprawne ustawianie koloru itp.
-                model.sendStroke("#00ff00", "round", "solid", (int) gc.getLineWidth(), mStroke);
+                model.sendStroke(model.hexColorToHashFormat(colorPicker.getValue()), "round", "solid", (int) gc.getLineWidth(), mStroke);
             });
         } catch (Exception e) {
             System.out.println(e);
@@ -88,6 +86,11 @@ public class RoomController {
     @FXML
     private void goToMainMenu() {
         view.loadMainMenu(model);
+    }
+
+    @FXML
+    private void copyURLToClipboard() {
+        model.copyURLToClipboard();
     }
 
     public void setModel(Model model) {
@@ -115,11 +118,7 @@ public class RoomController {
 
     public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke){
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.setStroke(new Color(
-                (float)Integer.valueOf( color.substring( 1, 3 ), 16 )/256f,
-                (float)Integer.valueOf( color.substring( 3, 5 ), 16 )/256f,
-                (float)Integer.valueOf( color.substring( 5, 7 ), 16 )/256f, 1));
-
+        gc.setStroke(Color.web(color));
 
         StrokeLineCap slc;
         switch (lineCap){
