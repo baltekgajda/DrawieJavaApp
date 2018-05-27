@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
@@ -37,6 +38,9 @@ public class RoomController {
 
     @FXML
     private ColorPicker colorPicker;
+
+    @FXML
+    private StackPane loadingPane;
 
     @FXML
     private void changeWidth() {
@@ -88,6 +92,7 @@ public class RoomController {
 
     @FXML
     private void goToMainMenu() {
+        loadingPane.setVisible(true);
         view.loadMainMenu(model);
     }
 
@@ -117,6 +122,7 @@ public class RoomController {
         GraphicsContext gc = serverCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, serverCanvas.getWidth(), serverCanvas.getHeight());
         gc.drawImage(dumpImg, 0, 0);
+        loadingPane.setVisible(false);
     }
 
     public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke){

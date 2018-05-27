@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #eeeeef;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawie.RoomController">
     <children>
@@ -74,6 +75,15 @@
                         <Blend />
                      </effect>
                   </Canvas>
+                  <StackPane fx:id="loadingPane" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: rgb(51,51,52);">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading ...">
+                           <font>
+                              <Font name="Arial" size="29.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
                </children>
             </StackPane>
             <Pane prefHeight="4.8" prefWidth="500.0" style="-fx-background-color: #eeeeef;" />
