@@ -53,6 +53,7 @@ public class Model {
                  imgInB64 = obj.getString("snapshot").split(",");
             } catch (JSONException e) {
                 e.printStackTrace();
+                return;
             }
             roomController.drawDumpBCOnCanvas(imgInB64[imgInB64.length-1]);
         });
@@ -64,6 +65,7 @@ public class Model {
                 roomController.drawStrokeBCOnCanvas(opt.getString("strokeStyle"), opt.getString("lineCap"), opt.getString("fillStyle"), opt.getInt("lineWidth"), obj.getJSONArray("stroke"));
             } catch (JSONException e) {
                 e.printStackTrace();
+                return;
             }
         });
     }
@@ -122,6 +124,6 @@ public class Model {
 
     public String hexColorToHashFormat(Color color)
     {
-        return "#"+(color.toString()).substring(2);
+        return "#"+(color.toString()).substring(2, 8);
     }
 }
