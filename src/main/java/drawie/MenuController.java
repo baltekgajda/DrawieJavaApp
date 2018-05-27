@@ -4,6 +4,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 public class MenuController {
 
     private View view;
@@ -14,15 +18,18 @@ public class MenuController {
 
     @FXML
     private void joinExistingRoom() {
-        model.joinRoom(roomUrl.getText());
-        System.out.println("joinExistingRoom" + roomUrl.getText());
-        view.loadRoom(model);
+        if(model.joinRoom(roomUrl.getText()))
+            view.loadRoom(model);
+        else
+        {
+            roomUrl.clear();
+            roomUrl.setPromptText("wrong URL");
+        }
     }
 
     @FXML
     private void createNewRoom() {
         model.newRoom();
-        System.out.println("createNewRoom");
         view.loadRoom(model);
     }
 

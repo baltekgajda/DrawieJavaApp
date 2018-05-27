@@ -70,6 +70,7 @@ public class View {
         RoomController roomController = loader.getController();
         roomController.setModel(model);
         roomController.setView(this);
+        model.setRoomController(roomController);
     }
 
     public FXMLLoader getLoader() {
