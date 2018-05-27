@@ -11,10 +11,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
 <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #eeeeef;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawie.RoomController">
     <children>
         <Button layoutX="715.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToMainMenu" prefWidth="70.0" stylesheets="@../styles/button.css" text="Menu" textAlignment="CENTER">
@@ -61,11 +63,29 @@
                   <Slider fx:id="paintbrushWidthSlider" max="30.0" onMouseReleased="#changeWidth" stylesheets="@../styles/slider.css" />
                </children>
             </HBox>
-            <Canvas fx:id="roomCanvas" height="500.0" onMouseClicked="#drawOnCanvas" onMouseDragged="#drawOnCanvas" width="500.0">
-               <effect>
-                  <Blend />
-               </effect>
-            </Canvas>
+            <StackPane prefHeight="500.0" prefWidth="500.0">
+               <children>
+                  <Canvas fx:id="serverCanvas" height="500.0" width="500.0">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </Canvas>
+                  <Canvas fx:id="roomCanvas" height="500.0" onMouseClicked="#drawOnCanvas" onMouseDragged="#drawOnCanvas" width="500.0">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </Canvas>
+                  <StackPane fx:id="loadingPane" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: rgb(51,51,52);">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading ...">
+                           <font>
+                              <Font name="Arial" size="29.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+               </children>
+            </StackPane>
             <Pane prefHeight="4.8" prefWidth="500.0" style="-fx-background-color: #eeeeef;" />
          </children>
       </VBox>

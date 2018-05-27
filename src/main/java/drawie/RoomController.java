@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
@@ -30,10 +31,16 @@ public class RoomController {
     private Canvas roomCanvas;
 
     @FXML
+    private Canvas serverCanvas;
+
+    @FXML
     private Slider paintbrushWidthSlider;
 
     @FXML
     private ColorPicker colorPicker;
+
+    @FXML
+    private StackPane loadingPane;
 
     @FXML
     private void changeWidth() {
@@ -83,6 +90,7 @@ public class RoomController {
 
     @FXML
     private void goToMainMenu() {
+        loadingPane.setVisible(true);
         view.loadMainMenu(model);
     }
 
@@ -109,13 +117,15 @@ public class RoomController {
         }
 
         Image dumpImg = new Image(inputStream);
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, roomCanvas.getWidth(), roomCanvas.getHeight());
+        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, serverCanvas.getWidth(), serverCanvas.getHeight());
         gc.drawImage(dumpImg, 0, 0);
+        loadingPane.setVisible(false);
     }
 
     public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke){
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        roomCanvas.getGraphicsContext2D().clearRect(0,0,roomCanvas.getWidth(),roomCanvas.getHeight());
+        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
         gc.setStroke(Color.web(color));
 
         StrokeLineCap slc;
