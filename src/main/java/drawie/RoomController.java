@@ -128,6 +128,7 @@ public class RoomController {
                 break;
             case "square":
                 slc = StrokeLineCap.SQUARE;
+                break;
             default:
                 slc = StrokeLineCap.BUTT;
         }
