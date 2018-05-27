@@ -30,6 +30,9 @@ public class RoomController {
     private Canvas roomCanvas;
 
     @FXML
+    private Canvas serverCanvas;
+
+    @FXML
     private Slider paintbrushWidthSlider;
 
     @FXML
@@ -111,13 +114,14 @@ public class RoomController {
         }
 
         Image dumpImg = new Image(inputStream);
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, roomCanvas.getWidth(), roomCanvas.getHeight());
+        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, serverCanvas.getWidth(), serverCanvas.getHeight());
         gc.drawImage(dumpImg, 0, 0);
     }
 
     public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke){
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        roomCanvas.getGraphicsContext2D().clearRect(0,0,roomCanvas.getWidth(),roomCanvas.getHeight());
+        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
         gc.setStroke(Color.web(color));
 
         StrokeLineCap slc;
