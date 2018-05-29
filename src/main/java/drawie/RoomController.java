@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -43,34 +44,50 @@ public class RoomController {
     private StackPane loadingPane;
 
     @FXML
+    private ToggleButton bucketFill;
+
+    @FXML
     private void changeWidth() {
-        GraphicsContext gc = roomCanvas.getGraphicsContext2D();
-        gc.setLineWidth(paintbrushWidthSlider.getValue());
+        //GraphicsContext gc = roomCanvas.getGraphicsContext2D();
+        //gc.setLineWidth(paintbrushWidthSlider.getValue());
     }
 
     @FXML
     private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         try {
+
+
             roomCanvas.setOnMousePressed(event -> {
-                mStroke = new Vector<>();
-                mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
-                gc.setStroke(colorPicker.getValue());
-                gc.beginPath();
-                gc.lineTo(event.getX(), event.getY());
-                gc.setLineCap(StrokeLineCap.ROUND);
-                gc.stroke();
+                if(bucketFill.isSelected())
+                {
+                    model.bucketFill((int) event.getX(), (int) event.getY(), colorPicker.getValue());
+                }
+                else {
+                    mStroke = new Vector<>();
+                    mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
+                    gc.setStroke(colorPicker.getValue());
+                    gc.setLineWidth((int) paintbrushWidthSlider.getValue());
+                    gc.beginPath();
+                    gc.lineTo(event.getX(), event.getY());
+                    gc.setLineCap(StrokeLineCap.ROUND);
+                    gc.stroke();
+                }
             });
 
             roomCanvas.setOnMouseDragged(event -> {
-                mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
-                gc.lineTo(event.getX(), event.getY());
-                gc.stroke();
+                if(!bucketFill.isSelected()) {
+                    gc.setLineWidth((int) paintbrushWidthSlider.getValue());
+                    mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
+                    gc.lineTo(event.getX(), event.getY());
+                    gc.stroke();
+                }
             });
 
             roomCanvas.setOnMouseReleased(event ->{
                 //TODO poprawne ustawianie koloru itp.
-                model.sendStroke(model.hexColorToHashFormat(colorPicker.getValue()), "round", "solid", (int) gc.getLineWidth(), mStroke);
+                if(!bucketFill.isSelected())
+                model.sendStroke(colorPicker.getValue(), "round", "solid", (int) paintbrushWidthSlider.getValue(), mStroke);
             });
         } catch (Exception e) {
             System.out.println(e);

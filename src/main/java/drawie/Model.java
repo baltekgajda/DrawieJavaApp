@@ -68,6 +68,7 @@ public class Model {
                 return;
             }
         });
+
     }
 
     public void handleRedoClick() {
@@ -78,7 +79,7 @@ public class Model {
         socket.emit("undo");
     }
 
-    public void sendStroke(String color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
+    public void sendStroke(Color color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
         JSONObject strokeObj = new JSONObject();
         JSONObject options = new JSONObject();
         JSONArray stroke = new JSONArray();
@@ -87,7 +88,7 @@ public class Model {
                 stroke.put(points);
             }
 
-            options.put("strokeStyle", color);
+            options.put("strokeStyle", hexColorToHashFormat(color));
             options.put("lineCap", lineCap);
             options.put("fillStyle", fillStyle);
             options.put("lineWidth", lineWidth);
@@ -122,8 +123,20 @@ public class Model {
         clipboard.setContents(selection, selection);
     }
 
-    public String hexColorToHashFormat(Color color)
+    private String hexColorToHashFormat(Color color)
     {
         return "#"+(color.toString()).substring(2, 8);
+    }
+
+    public void bucketFill(int x, int y, Color color) {
+        JSONObject floodFillObj = new JSONObject();
+        try{
+        floodFillObj.put("x",x);
+        floodFillObj.put("y",y);
+        floodFillObj.put("color",hexColorToHashFormat(color));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        socket.emit("floodFill", floodFillObj);
     }
 }

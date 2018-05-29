@@ -1,4 +1,4 @@
-.button {
+.toggle-button {
     -fx-min-width: 24px;
     -fx-min-height: 24px;
     -fx-background-color: #CCCCCC;
@@ -6,10 +6,10 @@
     -fx-padding: 0px;
 }
 
-.button:hover {
+.toggle-button:hover {
     -fx-background-color: #D2D2D7;
 }
 
-.button:pressed {
+.toggle-button:selected {
     -fx-background-color: #9a9a9f;
 }
