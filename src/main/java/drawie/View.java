@@ -2,10 +2,16 @@ package drawie;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -77,5 +83,48 @@ public class View {
         return this.loader;
     }
 
+
+    public void drawStrokeOnCanvas(GraphicsContext gc, String color, String lineCap, String fillStyle, int lineWidth, int[] stroke) {
+        gc.setStroke(Color.web(color));
+
+        switch (lineCap) {
+            case "round":
+                gc.setLineCap(StrokeLineCap.ROUND);
+                break;
+            case "square":
+                gc.setLineCap(StrokeLineCap.SQUARE);
+                break;
+            default:
+                gc.setLineCap(StrokeLineCap.BUTT);
+        }
+        //TODO setFillStyle?
+
+        gc.setLineWidth(lineWidth);
+
+        //drawStroke
+        gc.beginPath();
+        for (int i = 0; i < stroke.length; i += 2) {
+            gc.lineTo(stroke[i], stroke[i + 1]);
+            gc.stroke();
+        }
+    }
+
+    public void drawDumpBCOnCanvas(GraphicsContext gc, Image dumpImg, double width, double height) {
+        gc.clearRect(0, 0, width, height);
+        gc.drawImage(dumpImg, 0, 0);
+    }
+
+    public void drawUserStroke(GraphicsContext gc, double x, double y, int lineWidth) {
+        gc.setLineWidth(lineWidth);
+        gc.lineTo(x, y);
+        gc.stroke();
+    }
+
+    public void beginUserStroke(GraphicsContext gc, double x, double y, int lineWidth, Paint color) {
+        gc.setStroke(color);
+        gc.setLineCap(StrokeLineCap.ROUND);
+        gc.beginPath();
+        drawUserStroke(gc, x, y, lineWidth);
+    }
 }
 

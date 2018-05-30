@@ -56,44 +56,23 @@ public class RoomController {
     private void drawOnCanvas() {
         GraphicsContext gc = roomCanvas.getGraphicsContext2D();
         try {
-
-
             roomCanvas.setOnMousePressed(event -> {
-                if(bucketFill.isSelected())
-                {
-                    model.bucketFill((int) event.getX(), (int) event.getY(), colorPicker.getValue());
-                }
-                else {
-                    mStroke = new Vector<>();
-                    mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
-                    gc.setStroke(colorPicker.getValue());
-                    gc.setLineWidth((int) paintbrushWidthSlider.getValue());
-                    gc.beginPath();
-                    gc.lineTo(event.getX(), event.getY());
-                    gc.setLineCap(StrokeLineCap.ROUND);
-                    gc.stroke();
-                }
+                model.manageOnMousePressed(bucketFill.isSelected(), (int) event.getX(), (int) event.getY(), colorPicker.getValue());
             });
 
             roomCanvas.setOnMouseDragged(event -> {
-                if(!bucketFill.isSelected()) {
-                    gc.setLineWidth((int) paintbrushWidthSlider.getValue());
-                    mStroke.add(new int[]{(int) event.getX(), (int) event.getY()});
-                    gc.lineTo(event.getX(), event.getY());
-                    gc.stroke();
-                }
+                model.manageOnMouseDragged(bucketFill.isSelected(), (int) event.getX(), (int) event.getY());
             });
 
             roomCanvas.setOnMouseReleased(event ->{
-                //TODO poprawne ustawianie koloru itp.
-                if(!bucketFill.isSelected())
-                model.sendStroke(colorPicker.getValue(), "round", "solid", (int) paintbrushWidthSlider.getValue(), mStroke);
+                model.manageOnMouseReleased(bucketFill.isSelected(), colorPicker.getValue(), "round", "solid", (int) paintbrushWidthSlider.getValue());
             });
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
         }
     }
+
 
     @FXML
     private void undoButtonClicked() {
@@ -124,58 +103,21 @@ public class RoomController {
         this.view = view;
     }
 
-    public void drawDumpBCOnCanvas(String dumpInBase64) {
-        BASE64Decoder base64Decoder = new BASE64Decoder();
-        ByteArrayInputStream inputStream = null;
-        try {
-            inputStream = new ByteArrayInputStream(base64Decoder.decodeBuffer(dumpInBase64));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Image dumpImg = new Image(inputStream);
-        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, serverCanvas.getWidth(), serverCanvas.getHeight());
-        gc.drawImage(dumpImg, 0, 0);
+    public void drawDumpBCOnCanvas(Image dumpImg) {
+        view.drawDumpBCOnCanvas(serverCanvas.getGraphicsContext2D(), dumpImg, serverCanvas.getWidth(), serverCanvas.getHeight() );
         loadingPane.setVisible(false);
     }
 
-    public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, JSONArray stroke){
+    public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, int[] stroke){
         roomCanvas.getGraphicsContext2D().clearRect(0,0,roomCanvas.getWidth(),roomCanvas.getHeight());
-        GraphicsContext gc = serverCanvas.getGraphicsContext2D();
-        gc.setStroke(Color.web(color));
+        view.drawStrokeOnCanvas(serverCanvas.getGraphicsContext2D(), color, lineCap, fillStyle, lineWidth, stroke);
+    }
 
-        StrokeLineCap slc;
-        switch (lineCap){
-            case "round":
-                slc = StrokeLineCap.ROUND;
-                break;
-            case "square":
-                slc = StrokeLineCap.SQUARE;
-                break;
-            default:
-                slc = StrokeLineCap.BUTT;
-        }
-        gc.setLineCap(slc);
+    public void beginUserStroke(double x, double y) {
+        view.beginUserStroke(roomCanvas.getGraphicsContext2D(), x, y,(int) paintbrushWidthSlider.getValue(),colorPicker.getValue());
+    }
 
-        //TODO setFillStyle?
-
-        gc.setLineWidth(lineWidth);
-        //drawStroke
-        gc.beginPath();
-        for (int i=0; i<stroke.length(); i++){
-            JSONArray points;
-            int x=0,y=0;
-            try {
-                points = stroke.getJSONArray(i);
-                x = points.getInt(0);
-                y = points.getInt(1);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            gc.lineTo(x, y);
-            gc.stroke();
-        }
+    public  void drawUserStroke(double x, double y){
+        view.drawUserStroke(roomCanvas.getGraphicsContext2D(), x, y, (int) paintbrushWidthSlider.getValue());
     }
 }
