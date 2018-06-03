@@ -192,18 +192,18 @@ public class Model {
         }
 
         mStroke = new Vector<>();
-        mStroke.add(new int[]{x,y});
+        mStroke.add(new int[]{x, y});
         roomController.beginUserStroke(x, y);
     }
 
     public void manageOnMouseDragged(boolean fillSelected, int x, int y) {
         if (fillSelected) return;
-        mStroke.add(new int[]{x,y});
-        roomController.drawUserStroke(x,y);
+        mStroke.add(new int[]{x, y});
+        roomController.drawUserStroke(x, y);
     }
 
     public void manageOnMouseReleased(boolean fillSelected, Color color, String lineCap, String fillStyle, int lineWidth) {
-        if(fillSelected) return;
+        if (fillSelected) return;
         sendStroke(color, lineCap, fillStyle, lineWidth, mStroke);
     }
 }

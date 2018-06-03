@@ -26,8 +26,6 @@ public class RoomController {
     private View view;
     private Model model;
 
-    private Vector<int[]> mStroke = new Vector<>();
-
     @FXML
     private Canvas roomCanvas;
 
