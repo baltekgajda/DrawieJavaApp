@@ -117,7 +117,7 @@ public class View {
     }
 
     /**
-     *
+     * Drawing stroke on canvas
      * @param gc graphicsContext of the canvas
      * @param color color of the stroke
      * @param lineCap lineCap of the stroke
@@ -176,7 +176,7 @@ public class View {
     }
 
     /**
-     *
+     * Beggining of the user stroke
      * @param gc graphicsContext of the canvas
      * @param x x coordinate where the event of drawing was executed
      * @param y y coordinate where the event of drawing was executed
