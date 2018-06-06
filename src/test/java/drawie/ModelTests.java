@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.matchers.Any;
 import org.mockito.internal.util.reflection.Whitebox;
 
 import java.awt.*;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 
 public class ModelTests {
 
@@ -60,10 +63,10 @@ public class ModelTests {
     }
 
     @Test
-    public void copiedURLIsInClipboardWhenCopyIsDone(){
+    public void copiedURLIsInClipboardWhenCopyIsDone() {
         Whitebox.setInternalState(model, "roomURL", "ABCD");
         model.copyURLToClipboard();
-        String data ="";
+        String data = "";
         try {
             data = (String) Toolkit.getDefaultToolkit()
                     .getSystemClipboard().getData(DataFlavor.stringFlavor);
@@ -76,32 +79,68 @@ public class ModelTests {
     }
 
     @Test
-    public void handleRedoClickEmitsRedoEvent(){
+    public void handleRedoClickEmitsRedoEvent() {
         Whitebox.setInternalState(model, "socket", socket);
         model.handleRedoClick();
         Mockito.verify(socket, Mockito.atLeastOnce()).emit("redo");
     }
 
     @Test
-    public void handleUndoClickEmitsUndoEvent(){
+    public void handleUndoClickEmitsUndoEvent() {
         Whitebox.setInternalState(model, "socket", socket);
         model.handleUndoClick();
         Mockito.verify(socket, Mockito.atLeastOnce()).emit("undo");
     }
 
     @Test
-    public void mousePressedWithBucketFillSendsBucket(){
+    public void mousePressedWithBucketFillSendsBucket() {
         Whitebox.setInternalState(model, "mStroke", stroke);
-        model.manageOnMousePressed(true,0,0, new Color(0,0,0,0));
+        model.manageOnMousePressed(true, 0, 0, new Color(0, 0, 0, 0));
         Mockito.verify(stroke, Mockito.never()).add(new int[]{0, 0});
     }
 
     @Test
-    public void mousePressedWithoutBucketFillSendsBucket(){
+    public void mousePressedWithoutBucketFillSendsBucket() {
         Whitebox.setInternalState(model, "mStroke", stroke);
         Whitebox.setInternalState(model, "roomController", roomController);
-        model.manageOnMousePressed(false,0,0, new Color(0,0,0,0));
-        Mockito.verify(stroke, Mockito.atLeastOnce()).add(new int[]{0, 0});
+        model.manageOnMousePressed(false, 0, 0, new Color(0, 0, 0, 0));
+        Mockito.verify(roomController, Mockito.atLeastOnce()).beginUserStroke(0, 0);
     }
 
+
+    @Test
+    public void mouseReleasedWithBucketFillDoNothing() {
+        Whitebox.setInternalState(model, "mStroke", stroke);
+        Whitebox.setInternalState(model, "socket", socket);
+        model.manageOnMouseReleased(true, new Color(0,0,0,0), "","",0);
+        Mockito.verify(socket, Mockito.never()).emit("stroke");
+    }
+
+    @Test
+    public void mouseDraggedWithBucketFillDoNothing() {
+        Whitebox.setInternalState(model, "mStroke", stroke);
+        Whitebox.setInternalState(model, "socket", socket);
+        model.manageOnMouseDragged(true, 0, 0);
+        Mockito.verify(socket, Mockito.never()).emit("stroke");
+        Mockito.verify(stroke, Mockito.never()).add(new int[]{0, 0});
+    }
+
+    @Test
+    public void mouseReleasedWithoutBucketFillSendStroke() {
+        Vector<int[]> str = new Vector<>();
+        str.add(new int[]{0,0});
+        Whitebox.setInternalState(model, "mStroke", str);
+       // Whitebox.setInternalState(model, "mStroke", stroke);
+        Whitebox.setInternalState(model, "socket", socket);
+        model.manageOnMouseReleased(false, new Color(0,0,0,0), "","",0);
+        Mockito.verify(socket, Mockito.atLeastOnce()).emit(eq("stroke"), any());
+    }
+
+    @Test
+    public void mouseDraggedWithoutBucketFill() {
+        Whitebox.setInternalState(model, "mStroke", stroke);
+        Whitebox.setInternalState(model, "socket", socket);
+        model.manageOnMouseDragged(false, 0, 0);
+        Mockito.verify(stroke, Mockito.atLeastOnce()).add(new int[]{0, 0});
+    }
 }
