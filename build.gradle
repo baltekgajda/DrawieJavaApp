@@ -11,6 +11,10 @@ plugins {
 
 apply plugin: 'java'
 
+repositories{
+    mavenCentral()
+}
+
 dependencies {
     compile("io.socket:socket.io-client:1.0.0")
     testCompile("org.mockito:mockito-all:1.9.5")
