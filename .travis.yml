@@ -1,4 +1,5 @@
 language: java
+install: true
 
 jdk:
   - oraclejdk8
@@ -9,5 +10,5 @@ before_install:
 script:
  ./gradlew build
 
-#after_success:
-#  ./gradlew cobertura coveralls
+after_success:
+ ./gradlew cobertura coveralls
