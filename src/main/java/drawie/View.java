@@ -165,8 +165,8 @@ public class View {
     /**
      * Drawing stroke made by user
      * @param gc graphicsContext of the canvas
-     * @param x x coordinate where the of drawing was executed
-     * @param y y
+     * @param x x coordinate where the event of drawing was executed
+     * @param y y coordinate where the event of drawing was executed
      * @param lineWidth width of the line of the stroke
      */
     public void drawUserStroke(GraphicsContext gc, double x, double y, int lineWidth) {
@@ -178,8 +178,8 @@ public class View {
     /**
      *
      * @param gc graphicsContext of the canvas
-     * @param x x coordinate where the of drawing was executed
-     * @param y y coordinate where the of drawing was executed
+     * @param x x coordinate where the event of drawing was executed
+     * @param y y coordinate where the event of drawing was executed
      * @param lineWidth width of the line of the stroke
      * @param color color of the stroke chosen by user
      */
