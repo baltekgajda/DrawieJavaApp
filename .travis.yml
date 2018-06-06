@@ -11,4 +11,4 @@ script:
   ./gradlew build jacocoTestReport
 
 after_success:
-  ./gradlew jacocoRootReport coveralls
+  ./gradlew jacocoTestReport coveralls
