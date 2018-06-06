@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
+/**
+ * Controller for main menu view
+ */
 public class MenuController {
 
     private View view;
@@ -16,6 +19,9 @@ public class MenuController {
     @FXML
     private TextField roomUrl;
 
+    /**
+     * Handler for joining existing room when the button is pressed
+     */
     @FXML
     private void joinExistingRoom() {
         if(model.joinRoom(roomUrl.getText()))
@@ -27,21 +33,35 @@ public class MenuController {
         }
     }
 
+    /**
+     * Handler for creating new room when the button is pressed
+     */
     @FXML
     private void createNewRoom() {
         model.newRoom();
         view.loadRoom(model);
     }
 
+    /**
+     * Handler for exiting application
+     */
     @FXML
     private void exitDrawie() {
         Platform.exit();
     }
 
+    /**
+     * Setting model of the application
+     * @param model model to be set
+     */
     public void setModel(Model model) {
         this.model = model;
     }
 
+    /**
+     * Setting view of the application
+     * @param view view to be set
+     */
     public void setView(View view) {
         this.view = view;
     }

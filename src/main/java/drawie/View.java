@@ -15,11 +15,18 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+/**
+ * View class of the application
+ */
 public class View {
 
     private static Pane mainPane;
     private FXMLLoader loader;
 
+    /**
+     * Creating view object and displaying main menu
+     * @param primaryStage stage of the application
+     */
     public View(Stage primaryStage) {
         setDefaultStageSettings(primaryStage);
         this.loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
@@ -35,6 +42,10 @@ public class View {
         primaryStage.show();
     }
 
+    /**
+     * Setting stage settings
+     * @param primaryStage stage of the application
+     */
     private void setDefaultStageSettings(Stage primaryStage) {
 
         //TODO sprawdzic czy cos usunac
@@ -46,10 +57,20 @@ public class View {
     }
 
     //TODO nie wiem czy nie usunac
+
+    /**
+     * Setting image on the imageView of the application
+     * @param imageView imageView
+     * @param image image to be set
+     */
     public void setImageView(ImageView imageView, String image) {
         imageView.setImage(new Image(this.getClass().getResourceAsStream("/main/resources/images/" + image)));
     }
 
+    /**
+     * Setting loader of the application while changing screens
+     * @param loader loader to be set
+     */
     private void setLoader(FXMLLoader loader) {
         this.loader = loader;
         Pane pane = null;
@@ -62,6 +83,10 @@ public class View {
         mainPane.getChildren().add(pane);
     }
 
+    /**
+     * Loading main menu view
+     * @param model model of the application
+     */
     public void loadMainMenu(Model model) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
         setLoader(loader);
@@ -70,6 +95,10 @@ public class View {
         menuController.setView(this);
     }
 
+    /**
+     * Looading room of the application
+     * @param model model of the application
+     */
     public void loadRoom(Model model) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/Room.fxml"));
         setLoader(loader);
@@ -79,11 +108,23 @@ public class View {
         model.setRoomController(roomController);
     }
 
+    /**
+     * Returning loader
+     * @return loader
+     */
     public FXMLLoader getLoader() {
         return this.loader;
     }
 
-
+    /**
+     *
+     * @param gc graphicsContext of the canvas
+     * @param color color of the stroke
+     * @param lineCap lineCap of the stroke
+     * @param fillStyle fillStyle of the stroke
+     * @param lineWidth width of the line of the stroke
+     * @param stroke stroke points
+     */
     public void drawStrokeOnCanvas(GraphicsContext gc, String color, String lineCap, String fillStyle, int lineWidth, int[] stroke) {
         gc.setStroke(Color.web(color));
 
@@ -109,17 +150,39 @@ public class View {
         }
     }
 
+    /**
+     * Drawing image dump on canvas
+     * @param gc graphicsContext of the canvas
+     * @param dumpImg image of the dump
+     * @param width width of the image
+     * @param height height of the image
+     */
     public void drawDumpBCOnCanvas(GraphicsContext gc, Image dumpImg, double width, double height) {
         gc.clearRect(0, 0, width, height);
         gc.drawImage(dumpImg, 0, 0);
     }
 
+    /**
+     * Drawing stroke made by user
+     * @param gc graphicsContext of the canvas
+     * @param x x coordinate where the of drawing was executed
+     * @param y y
+     * @param lineWidth width of the line of the stroke
+     */
     public void drawUserStroke(GraphicsContext gc, double x, double y, int lineWidth) {
         gc.setLineWidth(lineWidth);
         gc.lineTo(x, y);
         gc.stroke();
     }
 
+    /**
+     *
+     * @param gc graphicsContext of the canvas
+     * @param x x coordinate where the of drawing was executed
+     * @param y y coordinate where the of drawing was executed
+     * @param lineWidth width of the line of the stroke
+     * @param color color of the stroke chosen by user
+     */
     public void beginUserStroke(GraphicsContext gc, double x, double y, int lineWidth, Paint color) {
         gc.setStroke(color);
         gc.setLineCap(StrokeLineCap.ROUND);
