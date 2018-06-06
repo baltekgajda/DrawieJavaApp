@@ -3,9 +3,5 @@ language: java
 jdk:
   - oraclejdk8
 
-script:
-chmod a+x gradlew
-  ./gradlew build
-
 #after_success:
 #./gradlew cobertura coveralls
