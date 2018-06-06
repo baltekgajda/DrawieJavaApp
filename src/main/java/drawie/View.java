@@ -139,10 +139,8 @@ public class View {
                 gc.setLineCap(StrokeLineCap.BUTT);
         }
         //TODO setFillStyle?
-
         gc.setLineWidth(lineWidth);
 
-        //drawStroke
         gc.beginPath();
         for (int i = 0; i < stroke.length; i += 2) {
             gc.lineTo(stroke[i], stroke[i + 1]);
