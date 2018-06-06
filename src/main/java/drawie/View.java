@@ -10,8 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -25,6 +23,7 @@ public class View {
 
     /**
      * Creating view object and displaying main menu
+     *
      * @param primaryStage stage of the application
      */
     public View(Stage primaryStage) {
@@ -44,6 +43,7 @@ public class View {
 
     /**
      * Setting stage settings
+     *
      * @param primaryStage stage of the application
      */
     private void setDefaultStageSettings(Stage primaryStage) {
@@ -60,15 +60,53 @@ public class View {
 
     /**
      * Setting image on the imageView of the application
+     *
      * @param imageView imageView
-     * @param image image to be set
+     * @param image     image to be set
      */
     public void setImageView(ImageView imageView, String image) {
         imageView.setImage(new Image(this.getClass().getResourceAsStream("/main/resources/images/" + image)));
     }
 
     /**
+     * Loading main menu view
+     *
+     * @param model model of the application
+     */
+    public void loadMainMenu(Model model) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
+        setLoader(loader);
+        MenuController menuController = loader.getController();
+        menuController.setModel(model);
+        menuController.setView(this);
+    }
+
+    /**
+     * Looading room of the application
+     *
+     * @param model model of the application
+     */
+    public void loadRoom(Model model) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/Room.fxml"));
+        setLoader(loader);
+        RoomController roomController = loader.getController();
+        roomController.setModel(model);
+        roomController.setView(this);
+        model.setRoomController(roomController);
+    }
+
+    /**
+     * Returning loader
+     *
+     * @return loader
+     */
+    public FXMLLoader getLoader() {
+        return this.loader;
+    }
+
+    /**
      * Setting loader of the application while changing screens
+     *
      * @param loader loader to be set
      */
     private void setLoader(FXMLLoader loader) {
@@ -84,46 +122,14 @@ public class View {
     }
 
     /**
-     * Loading main menu view
-     * @param model model of the application
-     */
-    public void loadMainMenu(Model model) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
-        setLoader(loader);
-        MenuController menuController = loader.getController();
-        menuController.setModel(model);
-        menuController.setView(this);
-    }
-
-    /**
-     * Looading room of the application
-     * @param model model of the application
-     */
-    public void loadRoom(Model model) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/Room.fxml"));
-        setLoader(loader);
-        RoomController roomController = loader.getController();
-        roomController.setModel(model);
-        roomController.setView(this);
-        model.setRoomController(roomController);
-    }
-
-    /**
-     * Returning loader
-     * @return loader
-     */
-    public FXMLLoader getLoader() {
-        return this.loader;
-    }
-
-    /**
      * Drawing stroke on canvas
-     * @param gc graphicsContext of the canvas
-     * @param color color of the stroke
-     * @param lineCap lineCap of the stroke
+     *
+     * @param gc        graphicsContext of the canvas
+     * @param color     color of the stroke
+     * @param lineCap   lineCap of the stroke
      * @param fillStyle fillStyle of the stroke
      * @param lineWidth width of the line of the stroke
-     * @param stroke stroke points
+     * @param stroke    stroke points
      */
     public void drawStrokeOnCanvas(GraphicsContext gc, String color, String lineCap, String fillStyle, int lineWidth, int[] stroke) {
         gc.setStroke(Color.web(color));
@@ -150,10 +156,11 @@ public class View {
 
     /**
      * Drawing image dump on canvas
-     * @param gc graphicsContext of the canvas
+     *
+     * @param gc      graphicsContext of the canvas
      * @param dumpImg image of the dump
-     * @param width width of the image
-     * @param height height of the image
+     * @param width   width of the image
+     * @param height  height of the image
      */
     public void drawDumpBCOnCanvas(GraphicsContext gc, Image dumpImg, double width, double height) {
         gc.clearRect(0, 0, width, height);
@@ -162,9 +169,10 @@ public class View {
 
     /**
      * Drawing stroke made by user
-     * @param gc graphicsContext of the canvas
-     * @param x x coordinate where the event of drawing was executed
-     * @param y y coordinate where the event of drawing was executed
+     *
+     * @param gc        graphicsContext of the canvas
+     * @param x         x coordinate where the event of drawing was executed
+     * @param y         y coordinate where the event of drawing was executed
      * @param lineWidth width of the line of the stroke
      */
     public void drawUserStroke(GraphicsContext gc, double x, double y, int lineWidth) {
@@ -175,11 +183,12 @@ public class View {
 
     /**
      * Beggining of the user stroke
-     * @param gc graphicsContext of the canvas
-     * @param x x coordinate where the event of drawing was executed
-     * @param y y coordinate where the event of drawing was executed
+     *
+     * @param gc        graphicsContext of the canvas
+     * @param x         x coordinate where the event of drawing was executed
+     * @param y         y coordinate where the event of drawing was executed
      * @param lineWidth width of the line of the stroke
-     * @param color color of the stroke chosen by user
+     * @param color     color of the stroke chosen by user
      */
     public void beginUserStroke(GraphicsContext gc, double x, double y, int lineWidth, Paint color) {
         gc.setStroke(color);
