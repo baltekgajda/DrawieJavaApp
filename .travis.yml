@@ -5,7 +5,7 @@ jdk:
   - oraclejdk8
 
 script:
-  ./gradlew build
+  ./gradlew assemble
 
 after_success:
 ./gradlew cobertura coveralls
