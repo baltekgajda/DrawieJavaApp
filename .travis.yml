@@ -5,9 +5,9 @@ jdk:
 
 before_install:
  - chmod +x gradlew
- 
-script:
- ./gradlew assemble
 
-#after_success:
-#./gradlew cobertura coveralls
+script:
+ ./gradlew build
+
+after_success:
+./gradlew cobertura coveralls
