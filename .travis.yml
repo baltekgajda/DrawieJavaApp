@@ -4,7 +4,8 @@ jdk:
   - oraclejdk8
 
 script:
-  ./gradlew assemle
+chmod a+x gradlew
+  ./gradlew build
 
 #after_success:
 #./gradlew cobertura coveralls
