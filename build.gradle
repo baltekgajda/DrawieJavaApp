@@ -18,24 +18,10 @@ repositories{
 
 jacoco {
     toolVersion = "0.8.1"
-    applyTo junitPlatformTest
+    reportsDir = file("$buildDir/customJacocoReportDir")
 }
-
-test {
-    useJUnitPlatform()
-
-    // Always run tests, even when nothing changed.
-    dependsOn 'cleanTest'
-
-    // Show test results.
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-}
-
 
 jacocoTestReport {
-
     reports {
         xml.enabled true
         html.enabled true
@@ -43,14 +29,6 @@ jacocoTestReport {
         html.destination file("${buildDir}/jacocoHtml")
     }
 }
-
-junitPlatformTest {
-    jacoco {
-        destinationFile = file("${buildDir}/jacoco/test.exec")
-    }
-}
-
-test.finalizedBy jacocoTestReport
 
 dependencies {
     compile("io.socket:socket.io-client:1.0.0")
