@@ -10,4 +10,10 @@ dependencies {
         mavenCentral()
     }
     compile("io.socket:socket.io-client:1.0.0")
+    //compile("junit:junit:4.12")
+    compile("org.mockito:mockito-all:1.9.5")
+
+
+    compile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+
 }

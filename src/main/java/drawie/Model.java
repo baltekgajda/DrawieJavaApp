@@ -42,7 +42,7 @@ public class Model {
         try {
             socket = IO.socket(text);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             return false;
         } catch (RuntimeException e) {
             return false;
@@ -74,7 +74,7 @@ public class Model {
         socket.emit("undo");
     }
 
-    public void sendStroke(Color color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
+    private void sendStroke(Color color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
         JSONObject strokeObj = new JSONObject();
         JSONObject options = new JSONObject();
         JSONArray stroke = new JSONArray();
@@ -108,7 +108,7 @@ public class Model {
         roomController = rc;
     }
 
-    public void setRoomURL(String roomURL) {
+    private void setRoomURL(String roomURL) {
         this.roomURL = roomURL;
     }
 
@@ -122,7 +122,7 @@ public class Model {
         return "#" + (color.toString()).substring(2, 8);
     }
 
-    public void bucketFill(int x, int y, Color color) {
+    private void bucketFill(int x, int y, Color color) {
         JSONObject floodFillObj = new JSONObject();
         try {
             floodFillObj.put("x", x);
