@@ -3,8 +3,8 @@ language: java
 jdk:
   - oraclejdk8
 
-#script:
-#  ./gradlew build
+script:
+ ./gradlew assemble
 
 after_success:
 ./gradlew cobertura coveralls
