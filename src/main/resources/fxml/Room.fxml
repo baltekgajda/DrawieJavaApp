@@ -58,7 +58,7 @@
                    </Button>
                   <ToggleButton fx:id="bucketFill" mnemonicParsing="false" stylesheets="@../styles/toggle-button.css">
                       <graphic>
-                           <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="88.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                                <image>
                                    <Image url="@../images/BucketIcon.png" />
                                </image>

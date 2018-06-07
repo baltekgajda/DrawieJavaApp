@@ -1,22 +1,43 @@
-apply plugin: 'idea'
-apply plugin: 'java'
 buildscript {
     repositories {
         mavenCentral()
     }
 }
-dependencies {
-    repositories {
-        mavenCentral()
-    }
-    compile("io.socket:socket.io-client:1.0.0")
-    //compile("junit:junit:4.12")
-    compile("org.mockito:mockito-all:1.9.5")
 
-
-    compile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
-    //testfx
-    compile("org.testfx:testfx-core:4.0.13-alpha")
-    testCompile "org.testfx:testfx-junit:4.0.13-alpha"
-
+plugins {
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
 }
+
+apply plugin: 'java'
+apply plugin: "jacoco"
+
+repositories{
+    mavenCentral()
+}
+
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled true
+    }
+}
+
+dependencies {
+    compile("io.socket:socket.io-client:1.0.0")
+    testCompile("org.mockito:mockito-all:1.9.5")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+}
+compile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+//testfx
+compile("org.testfx:testfx-core:4.0.13-alpha")
+testCompile "org.testfx:testfx-junit:4.0.13-alpha"
+
+    
+
+
