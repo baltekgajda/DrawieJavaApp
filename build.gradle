@@ -15,5 +15,8 @@ dependencies {
 
 
     compile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    //testfx
+    compile("org.testfx:testfx-core:4.0.13-alpha")
+    testCompile "org.testfx:testfx-junit:4.0.13-alpha"
 
 }
