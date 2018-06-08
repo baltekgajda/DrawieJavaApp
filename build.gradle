@@ -32,6 +32,11 @@ dependencies {
     compile("io.socket:socket.io-client:1.0.0")
     testCompile("org.mockito:mockito-all:1.9.5")
     testCompile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+
+    compile("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    //testfx
+    compile("org.testfx:testfx-core:4.0.13-alpha")
+    testCompile "org.testfx:testfx-junit:4.0.13-alpha"
 }
 
 cobertura.coverageFormats = ['html', 'xml']
