@@ -167,7 +167,9 @@ public class Model {
      * @return color in hex format
      */
     private String hexColorToHashFormat(Color color) {
-        return "#" + (color.toString()).substring(2, 8);
+        String colorToReturn = "#" + (color.toString()).substring(2, 8);
+        if (colorToReturn.equals("#000000")) return "#050505";
+        return colorToReturn;
     }
 
     /**

@@ -48,7 +48,6 @@ public class View {
      */
     private void setDefaultStageSettings(Stage primaryStage) {
 
-        //TODO sprawdzic czy cos usunac
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DrawieIcon.bmp")));
@@ -56,7 +55,6 @@ public class View {
         primaryStage.centerOnScreen();
     }
 
-    //TODO nie wiem czy nie usunac
 
     /**
      * Setting image on the imageView of the application
@@ -144,7 +142,6 @@ public class View {
             default:
                 gc.setLineCap(StrokeLineCap.BUTT);
         }
-        //TODO setFillStyle?
         gc.setLineWidth(lineWidth);
 
         gc.beginPath();
