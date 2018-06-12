@@ -14,22 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MenuControllerTests {
 
-    private String roomUrlTest = "https://drawie.herokuapp.com/?room=3332b08b-a9f5-4c40-32s21c-9ea26a3c5ef1";
-
     @Mock
     Model model;
-
     @Mock
     Socket socket;
-
     @Mock
     View view;
     @Mock
     Vector<int[]> stroke;
-
     @InjectMocks
     MenuController menuController;
-
+    private String roomUrlTest = "https://drawie.herokuapp.com/?room=3332b08b-a9f5-4c40-32s21c-9ea26a3c5ef1";
 
     @BeforeEach
     public void init() {

@@ -1,6 +1,5 @@
 package drawie;
 
-import io.socket.client.Url;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -9,17 +8,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.StrokeLineCap;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import sun.misc.BASE64Decoder;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Vector;
 
 /**
  * Controller for room view
@@ -98,6 +86,7 @@ public class RoomController {
      */
     @FXML
     private void goToMainMenu() {
+        model.closeSocket();
         loadingPane.setVisible(true);
         view.loadMainMenu(model);
     }

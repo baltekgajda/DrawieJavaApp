@@ -1,6 +1,6 @@
 # Drawie: multi-user online canvas drawing
-<!--[![Build Status](https://travis-ci.org/baltekgajda/DrawieJavaApp.svg?branch=master)](https://travis-ci.org/baltekgajda/DrawieJavaApp)
-[![Coverage Status](https://coveralls.io/repos/github/baltekgajda/DrawieJavaApp/badge.svg?branch=master)](https://coveralls.io/github/baltekgajda/DrawieJavaApp?branch=master)-->
+[![Build Status](https://travis-ci.org/baltekgajda/DrawieJavaApp.svg?branch=master)](https://travis-ci.org/baltekgajda/DrawieJavaApp)
+[![Coverage Status](https://coveralls.io/repos/github/baltekgajda/DrawieJavaApp/badge.svg?branch=master)](https://coveralls.io/github/baltekgajda/DrawieJavaApp?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Drawie is a desktop application designed to give you the ability to quickly visualize your ideas as drawings and share them with your friends. Thanks to application optimalization, changes made by your friends can be seen immediately. Moreover, you can use it online with others or enjoy drawing offline in single-user mode.

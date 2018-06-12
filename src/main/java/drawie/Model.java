@@ -1,26 +1,18 @@
 package drawie;
 
-import com.sun.jndi.toolkit.url.Uri;
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.client.Url;
-import io.socket.emitter.Emitter;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineCap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
 
 import java.awt.*;
-import java.awt.Image;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.UUID;
 import java.util.Vector;
@@ -290,5 +282,9 @@ public class Model {
     public void manageOnMouseReleased(boolean fillSelected, Color color, String lineCap, String fillStyle, int lineWidth) {
         if (fillSelected) return;
         sendStroke(color, lineCap, fillStyle, lineWidth, mStroke);
+    }
+
+    public void closeSocket() {
+        socket.close();
     }
 }
