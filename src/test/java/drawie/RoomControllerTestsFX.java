@@ -1,3 +1,4 @@
+/*
 package drawie;
 
 import javafx.application.Platform;
@@ -19,6 +20,11 @@ public class RoomControllerTestsFX extends ApplicationTest {
     Model model;
     RoomController roomController;
     private String roomUrlTest = "https://drawie.herokuapp.com/?room=3332b08b-a9f5-4c40-32s21c-9ea26a3c5ef1";
+
+    @AfterAll
+    public static void terminateTestApp() {
+        Platform.exit();
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -66,9 +72,5 @@ public class RoomControllerTestsFX extends ApplicationTest {
         roomController.drawStrokeBCOnCanvas(color.toString(), "", "", 1, stroke);
         Mockito.verify(view, Mockito.atLeastOnce()).drawStrokeOnCanvas(serverCanvas.getGraphicsContext2D(), color.toString(), "", "", 1, stroke);
     }
-
-    @AfterAll
-    public static void terminateTestApp() {
-        Platform.exit();
-    }
 }
+*/
