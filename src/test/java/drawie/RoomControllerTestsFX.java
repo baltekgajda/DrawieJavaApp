@@ -3,9 +3,6 @@ package drawie;
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -46,7 +43,7 @@ public class RoomControllerTestsFX extends ApplicationTest {
         Mockito.verify(view, Mockito.atLeastOnce()).drawUserStroke(gc, 0, 0, 1);
     }
 
-    @Test
+    /*@Test
     public void beginUserStrokeExecutesDrawUserStrokeOnView() {
         System.out.println("TEST");
         roomController = (RoomController) Whitebox.getInternalState(model, "roomController");
@@ -75,5 +72,5 @@ public class RoomControllerTestsFX extends ApplicationTest {
         int[] stroke = {1, 2};
         roomController.drawStrokeBCOnCanvas(color.toString(), "", "", 1, stroke);
         Mockito.verify(view, Mockito.atLeastOnce()).drawStrokeOnCanvas(serverCanvas.getGraphicsContext2D(), color.toString(), "", "", 1, stroke);
-    }
+    }*/
 }
