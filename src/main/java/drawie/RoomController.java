@@ -56,7 +56,7 @@ public class RoomController {
                 model.manageOnMouseDragged(bucketFill.isSelected(), (int) event.getX(), (int) event.getY());
             });
 
-            roomCanvas.setOnMouseReleased(event ->{
+            roomCanvas.setOnMouseReleased(event -> {
                 model.manageOnMouseReleased(bucketFill.isSelected(), colorPicker.getValue(), "round", "solid", (int) paintbrushWidthSlider.getValue());
             });
         } catch (Exception e) {
@@ -101,6 +101,7 @@ public class RoomController {
 
     /**
      * Setting model of the application
+     *
      * @param model model to be set
      */
     public void setModel(Model model) {
@@ -109,6 +110,7 @@ public class RoomController {
 
     /**
      * Setting view of the application
+     *
      * @param view
      */
     public void setView(View view) {
@@ -117,41 +119,45 @@ public class RoomController {
 
     /**
      * Passing parameters of dump from model to view
+     *
      * @param dumpImg dump image to be drawn
      */
     public void drawDumpBCOnCanvas(Image dumpImg) {
-        view.drawDumpBCOnCanvas(serverCanvas.getGraphicsContext2D(), dumpImg, serverCanvas.getWidth(), serverCanvas.getHeight() );
+        view.drawDumpBCOnCanvas(serverCanvas.getGraphicsContext2D(), dumpImg, serverCanvas.getWidth(), serverCanvas.getHeight());
         loadingPane.setVisible(false);
     }
 
     /**
      * Passing parameters of stroke from model to view
-     * @param color color of stroke
-     * @param lineCap lineCap of stroke
+     *
+     * @param color     color of stroke
+     * @param lineCap   lineCap of stroke
      * @param fillStyle fillStyle of stroke
      * @param lineWidth lineWidth of stroke
-     * @param stroke array of stroke points
+     * @param stroke    array of stroke points
      */
-    public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, int[] stroke){
-        roomCanvas.getGraphicsContext2D().clearRect(0,0,roomCanvas.getWidth(),roomCanvas.getHeight());
+    public void drawStrokeBCOnCanvas(String color, String lineCap, String fillStyle, int lineWidth, int[] stroke) {
+        roomCanvas.getGraphicsContext2D().clearRect(0, 0, roomCanvas.getWidth(), roomCanvas.getHeight());
         view.drawStrokeOnCanvas(serverCanvas.getGraphicsContext2D(), color, lineCap, fillStyle, lineWidth, stroke);
     }
 
     /**
      * Beginning users stroke
+     *
      * @param x x coordinate showing where the mouse was pressed
      * @param y y coordinate showing where the mouse was pressed
      */
     public void beginUserStroke(double x, double y) {
-        view.beginUserStroke(roomCanvas.getGraphicsContext2D(), x, y,(int) paintbrushWidthSlider.getValue(),colorPicker.getValue());
+        view.beginUserStroke(roomCanvas.getGraphicsContext2D(), x, y, (int) paintbrushWidthSlider.getValue(), colorPicker.getValue());
     }
 
     /**
      * Drawing users stroke
+     *
      * @param x x coordinate showing where the mouse was dragged
      * @param y y coordinate showing where the mouse was dragged
      */
-    public  void drawUserStroke(double x, double y){
+    public void drawUserStroke(double x, double y) {
         view.drawUserStroke(roomCanvas.getGraphicsContext2D(), x, y, (int) paintbrushWidthSlider.getValue());
     }
 }

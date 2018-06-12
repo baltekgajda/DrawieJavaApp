@@ -15,7 +15,6 @@ public class RoomControllerTestsFX extends ApplicationTest {
 
     View view;
     Model model;
-    MenuController menuController;
     RoomController roomController;
     private String roomUrlTest = "https://drawie.herokuapp.com/?room=3332b08b-a9f5-4c40-32s21c-9ea26a3c5ef1";
 

@@ -6,19 +6,18 @@ import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sun.misc.BASE64Decoder;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.UUID;
 import java.util.Vector;
 
 /**
- *Model class of the application containing web communication and application logic
+ * Model class of the application containing web communication and application logic
  */
 public class Model {
 
@@ -32,6 +31,7 @@ public class Model {
 
     /**
      * Joining the room of Drawie App with given URL
+     *
      * @param text room URL
      * @return true if entered the room, false otherwise
      */
@@ -42,7 +42,7 @@ public class Model {
         try {
             socket = IO.socket(text);
         } catch (URISyntaxException e) {
-           // e.printStackTrace();
+            // e.printStackTrace();
             return false;
         } catch (RuntimeException e) {
             return false;
@@ -85,11 +85,12 @@ public class Model {
 
     /**
      * Sending stroke to the server
-     * @param color color of stroke
-     * @param lineCap lineCap of stroke
+     *
+     * @param color     color of stroke
+     * @param lineCap   lineCap of stroke
      * @param fillStyle fillStyle of stroke
      * @param lineWidth width of the stroke
-     * @param mStroke array of stroke points
+     * @param mStroke   array of stroke points
      */
     private void sendStroke(Color color, String lineCap, String fillStyle, int lineWidth, Vector<int[]> mStroke) {
         JSONObject strokeObj = new JSONObject();
@@ -122,6 +123,7 @@ public class Model {
 
     /**
      * Generating random user id for room id
+     *
      * @return random user id
      */
     private String generateRandomUUID() {
@@ -130,6 +132,7 @@ public class Model {
 
     /**
      * Setting room controller
+     *
      * @param rc room controller to be set
      */
     public void setRoomController(RoomController rc) {
@@ -138,6 +141,7 @@ public class Model {
 
     /**
      * Setting rooomURL
+     *
      * @param roomURL roomURL to be set
      */
     private void setRoomURL(String roomURL) {
@@ -155,6 +159,7 @@ public class Model {
 
     /**
      * Changing color from Color class to hex format
+     *
      * @param color color in Color class format
      * @return color in hex format
      */
@@ -166,8 +171,9 @@ public class Model {
 
     /**
      * Sending floodFill event to the server
-     * @param x where the mouse was pressed x
-     * @param y where the mouse was pressed y
+     *
+     * @param x     where the mouse was pressed x
+     * @param y     where the mouse was pressed y
      * @param color color that is selected by the user
      */
     private void bucketFill(int x, int y, Color color) {
@@ -185,6 +191,7 @@ public class Model {
 
     /**
      * Mangaing dump received by socket
+     *
      * @param obj JSONObject received by socket
      */
     public void manageReceivedDumpBC(JSONObject obj) {
@@ -196,19 +203,13 @@ public class Model {
             return;
         }
 
-        ByteArrayInputStream inputStream;
-        try {
-            inputStream = new ByteArrayInputStream(new BASE64Decoder().decodeBuffer(imgInB64[imgInB64.length - 1]));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(imgInB64[imgInB64.length - 1]));
         roomController.drawDumpBCOnCanvas(new javafx.scene.image.Image(inputStream));
     }
 
     /**
      * Mangaging stroke received by socket
+     *
      * @param obj JSONObject received by socket
      */
     public void manageReceiveStrokeBC(JSONObject obj) {
@@ -243,10 +244,11 @@ public class Model {
 
     /**
      * Managing logic when mouse was pressed on canvas
+     *
      * @param fillSelected is the flood fill selected?
-     * @param x x coordinate where the mouse was pressed
-     * @param y coordinate where the mouse was pressed
-     * @param color color selected by user
+     * @param x            x coordinate where the mouse was pressed
+     * @param y            coordinate where the mouse was pressed
+     * @param color        color selected by user
      */
     public void manageOnMousePressed(boolean fillSelected, int x, int y, Color color) {
         if (fillSelected) {
@@ -261,9 +263,10 @@ public class Model {
 
     /**
      * Managing logic when mouse was dragged on canvas
+     *
      * @param fillSelected is the flood fill selected?
-     * @param x x coordinate where the mouse was pressed
-     * @param y coordinate where the mouse was pressed
+     * @param x            x coordinate where the mouse was pressed
+     * @param y            coordinate where the mouse was pressed
      */
     public void manageOnMouseDragged(boolean fillSelected, int x, int y) {
         if (fillSelected) return;
@@ -273,11 +276,12 @@ public class Model {
 
     /**
      * Managing logic when mouse was released on canvas
+     *
      * @param fillSelected is the flood fill selected?
-     * @param color color selected by user
-     * @param  lineCap lineCap of the stroke
-     * @param fillStyle fillStyle of the stroke
-     * @param lineWidth width of the stroke set by user
+     * @param color        color selected by user
+     * @param lineCap      lineCap of the stroke
+     * @param fillStyle    fillStyle of the stroke
+     * @param lineWidth    width of the stroke set by user
      */
     public void manageOnMouseReleased(boolean fillSelected, Color color, String lineCap, String fillStyle, int lineWidth) {
         if (fillSelected) return;
