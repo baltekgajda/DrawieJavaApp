@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
@@ -21,13 +22,14 @@ public class RoomControllerTestsFX extends ApplicationTest {
     RoomController roomController;
     private String roomUrlTest = "https://drawie.herokuapp.com/?room=3332b08b-a9f5-4c40-32s21c-9ea26a3c5ef1";
 
-    @AfterAll
     public static void terminateTestApp() {
+        System.out.println("END");
         Platform.exit();
     }
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("START");
         view = Mockito.spy(new View(primaryStage));
         model = new Model();
         MenuController menuController = view.getLoader().getController();
@@ -39,14 +41,17 @@ public class RoomControllerTestsFX extends ApplicationTest {
 
     @Test
     public void drawUserStrokeExecutesDrawUserStrokeOnView() {
+        System.out.println("TEST");
         roomController = (RoomController) Whitebox.getInternalState(model, "roomController");
         roomController.drawUserStroke(0, 0);
         GraphicsContext gc = ((Canvas) Whitebox.getInternalState(roomController, "roomCanvas")).getGraphicsContext2D();
         Mockito.verify(view, Mockito.atLeastOnce()).drawUserStroke(gc, 0, 0, 1);
+        terminateTestApp();
     }
 
     @Test
     public void beginUserStrokeExecutesDrawUserStrokeOnView() {
+        System.out.println("TEST");
         roomController = (RoomController) Whitebox.getInternalState(model, "roomController");
         roomController.beginUserStroke(0, 0);
         GraphicsContext gc = ((Canvas) Whitebox.getInternalState(roomController, "roomCanvas")).getGraphicsContext2D();
@@ -56,6 +61,7 @@ public class RoomControllerTestsFX extends ApplicationTest {
 
     @Test
     public void drawDumpOnCanvasExecutesDrawDumpOnView() {
+        System.out.println("TEST");
         roomController = (RoomController) Whitebox.getInternalState(model, "roomController");
         Image img = null;
         Canvas serverCanvas = ((Canvas) Whitebox.getInternalState(roomController, "serverCanvas"));
@@ -65,6 +71,7 @@ public class RoomControllerTestsFX extends ApplicationTest {
 
     @Test
     public void drawStrokeOnCanvasExecutesDrawDumpOnView() {
+        System.out.println("TEST");
         roomController = (RoomController) Whitebox.getInternalState(model, "roomController");
         Canvas serverCanvas = ((Canvas) Whitebox.getInternalState(roomController, "serverCanvas"));
         Color color = new Color(0, 0, 0, 0);

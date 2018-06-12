@@ -4,8 +4,11 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: "jacoco"
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
 
 repositories {
     mavenCentral()
@@ -20,6 +23,13 @@ dependencies {
     //testfx
     compile("org.testfx:testfx-core:4.0.13-alpha")
     compile("org.testfx:testfx-junit5:4.0.13-alpha")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 
 test {
